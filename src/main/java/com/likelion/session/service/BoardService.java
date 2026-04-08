@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
-@Service
-@RequiredArgsConstructor
-@Transactional
+@Slf4j // @Slf4j: 다양한 로깅 프레임 워크에 대한 추상화(인터페이스) 역할을 하는 라이브러리
+@Service // @Service: 비즈니스 로직을 처리하는 클래스를 표시
+@RequiredArgsConstructor // @RequiredArgsConstructor: 필수 인자를 가진 생성자를 자동 생성
+@Transactional // @Transactional: 특정 메서드 또는 클래스에서 수행되는 ‘트랜잭션’과 관련되어 관리를 위해서 사용(트랜잭션: 데이터베이스 작업이 모두 성공하거나 모두 실패할 때까지 어떤 작업도 부분적으로 적용하지 않고 묶어서 처리)
 public class BoardService {
 
-    private final ;
+    private final BoardRepository boardRepository;
 
     /*
         게시글 생성
@@ -51,7 +51,7 @@ public class BoardService {
         - DB에 있는 모든 게시글을 가져옴
         - Entity 리스트를 Response DTO 리스트로 변환
      */
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) // @Transactional: 특정 메서드 또는 클래스에서 수행되는 ‘트랜잭션’과 관련되어 관리를 위해서 사용(읽기 전용)
     public List<BoardResponse> findAll() {
         return boardRepository.findAll()
                 .stream()
@@ -71,7 +71,7 @@ public class BoardService {
         - id로 게시글 조회
         - 없으면 예외 발생
      */
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) // @Transactional: 특정 메서드 또는 클래스에서 수행되는 ‘트랜잭션’과 관련되어 관리를 위해서 사용(읽기 전용)
     public BoardResponse findById(Long id) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
