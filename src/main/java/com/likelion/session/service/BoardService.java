@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Slf4j
-@Service
-@RequiredArgsConstructor
-@Transactional
+@Service //이 클래스가 비즈니스 로직 담당임을 Spring에 알려줌.
+@RequiredArgsConstructor // final이 붙은 필드(boardRepository)를 생성자로 자동 주입해줌
+@Transactional //DB 작업 도중 에러가 나면 모든 작업을 이전으로 롤백함, 조회 전용 설정으로 성능 최적화에 씀.
 public class BoardService {
 
-    private final ;
+    private final BoardRepository boardRepository;
 
     /*
         게시글 생성
