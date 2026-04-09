@@ -17,27 +17,27 @@ public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ;
+    private Long id ;
 
     // 게시글 제목
     @Column(nullable = false, length = 100)
-    private String ;
+    private String title;
 
     // 게시글 내용
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String ;
+    private String content;
 
     // 작성자
     @Column(nullable = false, length = 30)
-    private String ;
+    private String writer;
 
     // 생성 시간
     @Column(nullable = false)
-    private LocalDateTime ;
+    private LocalDateTime createdAt;
 
     // 수정 시간
     @Column(nullable = false)
-    private LocalDateTime ;
+    private LocalDateTime updatedAt;
 
 
     public Board(String title, String content, String writer) {
