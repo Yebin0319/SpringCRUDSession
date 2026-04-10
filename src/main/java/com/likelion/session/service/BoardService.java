@@ -12,13 +12,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
-@Service
+@Slf4j//로그 찍는 도구 자동 생성
+@Service//비즈니스 로직 담당 클래스
 @RequiredArgsConstructor
-@Transactional
+@Transactional//하나의 작업을 묶어서 처리(성공->커밋, 실패->롤백)
 public class BoardService {
 
-    private final ;
+    private final BoardRepository boardRepository;
 
     /*
         게시글 생성
