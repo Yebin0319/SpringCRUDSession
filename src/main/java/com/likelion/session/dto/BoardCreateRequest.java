@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
+@Setter//객체의 값을 바꾸는 메서드
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardCreateRequest {
-    // 넘겨주고 싶은 정보: 제목(title), 내용(content), 작성자(writer)
-    private String ;
-    private String ;
-    private String ;
+    private String title;
+    private String content;
+    private String writer;
 }
