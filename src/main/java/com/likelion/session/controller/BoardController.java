@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/boards")
-@RequiredArgsConstructor
+@RestController//REST API 컨트롤러
+@RequestMapping("/boards")//Spring MVC에서 HTTP 요청을 특정 메서드나 클래스에 매핑
+@RequiredArgsConstructor//final 또는 @NonNull 필드를 매개변수로 받는 생성자를 자동으로 생성
 public class BoardController {
 
-    private final ;
+    private final BoardService boardService;
 
     /*
         게시글 생성
@@ -32,44 +32,44 @@ public class BoardController {
         -> 결과 반환
         -> JSON 응답
      */
-    @Operation(
+    @Operation(//API 문서에서 엔드포인트에 대한 설명을 작성할 때 사용
             summary = "게시글 생성",
             description = "새로운 게시글을 생성합니다."
     )
-    @
+    @PostMapping//Spring MVC에서 HTTP POST 요청을 특정 메서드에 매핑 @RequestMapping의 축약형
     public ResponseEntity<BoardResponse> create(@RequestBody BoardCreateRequest request) {
         BoardResponse response = boardService.create(request);
         return ResponseEntity.ok(response);
     }
 
     // 게시글 전체 조회
-    @Operation(
+    @Operation(//API 문서에서 엔드포인트에 대한 설명을 작성할 때 사용
             summary = "게시글 전체 조회",
             description = "등록된 모든 게시글을 조회합니다."
     )
-    @
+    @GetMapping//GET 요청 매핑
     public ResponseEntity<List<BoardResponse>> findAll() {
         List<BoardResponse> response = boardService.findAll();
         return ResponseEntity.ok(response);
     }
 
     // 게시글 단건 조회
-    @Operation(
+    @Operation(//API 문서에서 엔드포인트에 대한 설명을 작성할 때 사용
             summary = "게시글 단건 조회",
             description = "id로 특정 게시글을 조회합니다."
     )
-    @GetMapping("/{id}")
-    public ResponseEntity<BoardResponse> findById(@PathVariable Long id) {
+    @GetMapping("/{id}")//GET 요청 매핑
+    public ResponseEntity<BoardResponse> findById(@PathVariable Long id) {//URL 경로의 변수 값을 메서드 파라미터로 추출
         BoardResponse response = boardService.findById(id);
         return ResponseEntity.ok(response);
     }
 
     // 게시글 수정
-    @Operation(
+    @Operation(//API 문서에서 엔드포인트에 대한 설명을 작성할 때 사용
             summary = "게시글 수정",
             description = "id로 특정 게시글의 제목과 내용을 수정합니다."
     )
-    @("/{id}")
+    @PutMapping("/{id}")//HTTP PUT 요청을 매핑하며, 리소스를 전체 교체할 때 사용
     public ResponseEntity<BoardResponse> update(@PathVariable Long id,
                                                 @RequestBody BoardUpdateRequest request) {
         BoardResponse response = boardService.update(id, request);
@@ -77,11 +77,11 @@ public class BoardController {
     }
 
     // 게시글 삭제
-    @Operation(
+    @Operation(//API 문서에서 엔드포인트에 대한 설명을 작성할 때 사용
             summary = "게시글 삭제",
             description = "id로 특정 게시글을 삭제합니다."
     )
-    @("/{id}")
+    @DeleteMapping("/{id}")//HTTP DELETE 요청을 매핑하며, 리소스를 삭제할 때 사용
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         boardService.delete(id);
         return ResponseEntity.noContent().build();
