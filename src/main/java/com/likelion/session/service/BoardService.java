@@ -5,20 +5,20 @@ import com.likelion.session.dto.BoardCreateRequest;
 import com.likelion.session.dto.BoardResponse;
 import com.likelion.session.dto.BoardUpdateRequest;
 import com.likelion.session.repository.BoardRepository;
-import org.springframework.transaction.annotation.Transactional;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;//메서드 또는 클래스에 트랜잭션을 적용하는 어노테이션
+import lombok.RequiredArgsConstructor;//final 필드만 매개변수로 받는 생성자를 자동 생성하는 Lombok 어노테이션
+import lombok.extern.slf4j.Slf4j;//로그를 출력하기 위한 Lombok 어노테이션
+import org.springframework.stereotype.Service;//해당 클래스가 비즈니스 로직을 처리하는 서비스 계층임을 선언하는 어노테이션
 
 import java.util.List;
 
-@Slf4j
-@Service
-@RequiredArgsConstructor
-@Transactional
+@Slf4j//로그를 출력하기 위한 Lombok 어노테이션
+@Service//해당 클래스가 비즈니스 로직을 처리하는 서비스 계층임을 선언하는 어노테이션
+@RequiredArgsConstructor//final 필드만 매개변수로 받는 생성자를 자동 생성하는 Lombok 어노테이션
+@Transactional//메서드 또는 클래스에 트랜잭션을 적용하는 어노테이션
 public class BoardService {
 
-    private final ;
+    private final BoardRepository boardRepository;
 
     /*
         게시글 생성
@@ -71,7 +71,7 @@ public class BoardService {
         - id로 게시글 조회
         - 없으면 예외 발생
      */
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true)//메서드 또는 클래스에 트랜잭션을 적용하는 어노테이션
     public BoardResponse findById(Long id) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
