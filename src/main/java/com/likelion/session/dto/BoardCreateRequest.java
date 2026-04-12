@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter//Getter 메서드 자동 생성
+@Setter // 모든 필드에 대한 setter 메서드를 자동 생성
+@NoArgsConstructor // 파라미터가 없는 기본 생성자 생성
+@AllArgsConstructor // 모든 필드를 매개변수로 가지는 생성자 생성
 public class BoardCreateRequest {
-    // 넘겨주고 싶은 정보: 제목(title), 내용(content), 작성자(writer)
-    private String ;
-    private String ;
-    private String ;
+    private String title;
+    private String content;
+    private String writer;
 }
