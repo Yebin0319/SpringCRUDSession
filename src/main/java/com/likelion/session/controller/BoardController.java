@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/boards")
+@RestController // JSON 형태로 응답을 보내는 컨트롤러
+@RequestMapping("/boards") // 이 컨트롤러의 모든 URL에 /boards를 붙여줌
 @RequiredArgsConstructor
 public class BoardController {
 
-    private final ;
+    private final BoardService boardService;
 
     /*
         게시글 생성
@@ -36,7 +36,7 @@ public class BoardController {
             summary = "게시글 생성",
             description = "새로운 게시글을 생성합니다."
     )
-    @
+    @PostMapping // 데이터 생성
     public ResponseEntity<BoardResponse> create(@RequestBody BoardCreateRequest request) {
         BoardResponse response = boardService.create(request);
         return ResponseEntity.ok(response);
@@ -47,7 +47,7 @@ public class BoardController {
             summary = "게시글 전체 조회",
             description = "등록된 모든 게시글을 조회합니다."
     )
-    @
+    @GetMapping // 데이터 조회
     public ResponseEntity<List<BoardResponse>> findAll() {
         List<BoardResponse> response = boardService.findAll();
         return ResponseEntity.ok(response);
@@ -69,7 +69,7 @@ public class BoardController {
             summary = "게시글 수정",
             description = "id로 특정 게시글의 제목과 내용을 수정합니다."
     )
-    @("/{id}")
+    @PutMapping("/{id}") // 데이터 수정
     public ResponseEntity<BoardResponse> update(@PathVariable Long id,
                                                 @RequestBody BoardUpdateRequest request) {
         BoardResponse response = boardService.update(id, request);
@@ -81,7 +81,7 @@ public class BoardController {
             summary = "게시글 삭제",
             description = "id로 특정 게시글을 삭제합니다."
     )
-    @("/{id}")
+    @DeleteMapping("/{id}") // 데이터 삭제
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         boardService.delete(id);
         return ResponseEntity.noContent().build();
