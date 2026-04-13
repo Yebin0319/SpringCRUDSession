@@ -6,8 +6,8 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Getter
-@AllArgsConstructor
+@Getter // 데이터 조회를 위한 getter 메서드 자동 생성
+@AllArgsConstructor // 모든 필드(id, title 등)를 포함한 생성자 자동 생성
 @Builder // Service에서 .builder().id(xxx).title(xxx)...build() 식으로 필드를 선택적으로 세팅할 수 있음.
 public class BoardResponse {
 

@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController // JSON 형태로 응답을 보내는 컨트롤러
 @RequestMapping("/boards") // 이 컨트롤러의 모든 URL에 /boards를 붙여줌
-@RequiredArgsConstructor
+@RequiredArgsConstructor // final이 붙은 필드(boardService)를 생성자로 자동 주입해줌
 public class BoardController {
 
     private final BoardService boardService;
@@ -38,6 +38,7 @@ public class BoardController {
     )
     @PostMapping // 데이터 생성
     public ResponseEntity<BoardResponse> create(@RequestBody BoardCreateRequest request) {
+        // @RequestBody: 클라이언트가 보낸 JSON 데이터를 자바 객체로 변환해줌
         BoardResponse response = boardService.create(request);
         return ResponseEntity.ok(response);
     }
@@ -60,6 +61,7 @@ public class BoardController {
     )
     @GetMapping("/{id}")
     public ResponseEntity<BoardResponse> findById(@PathVariable Long id) {
+        // @PathVariable: URL 경로에 있는 {id} 값을 파라미터 변수로 받아옴
         BoardResponse response = boardService.findById(id);
         return ResponseEntity.ok(response);
     }
