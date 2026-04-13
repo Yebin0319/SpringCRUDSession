@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Slf4j
-@Service
-@RequiredArgsConstructor
-@Transactional
+@Service // Service 계층 Bean 등록
+@RequiredArgsConstructor // final 필드 생성자 자동 생성
+@Transactional // 트랜잭션 관리
 public class BoardService {
 
-    private final ;
+    private final BoardRepository boardRepository;
 
     /*
         게시글 생성
@@ -51,7 +51,7 @@ public class BoardService {
         - DB에 있는 모든 게시글을 가져옴
         - Entity 리스트를 Response DTO 리스트로 변환
      */
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) // 조회 전용
     public List<BoardResponse> findAll() {
         return boardRepository.findAll()
                 .stream()
