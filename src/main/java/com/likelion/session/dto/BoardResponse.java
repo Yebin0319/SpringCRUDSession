@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor //모든 필드를 파라미터로 받는 생성자를 자동 생성
 @Builder
 public class BoardResponse {
 
