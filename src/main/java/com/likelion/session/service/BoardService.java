@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
-@Service
-@RequiredArgsConstructor
-@Transactional
+@Slf4j //로깅 객체를 자동 생성
+@Service //해당 클래스가 비즈니스 로직 담당임을 Spring에 알려줌
+@RequiredArgsConstructor //final이 붙은 필드(boardRepository)를 생성자로 자동 주입해줌
+@Transactional //DB 작업 도중 에러가 나면 모든 작업을 이전으로 롤백함
 public class BoardService {
 
     private final BoardRepository boardRepository;
@@ -51,7 +51,7 @@ public class BoardService {
         - DB에 있는 모든 게시글을 가져옴
         - Entity 리스트를 Response DTO 리스트로 변환
      */
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) //조회 전용 설정 > 성능 최적화
     public List<BoardResponse> findAll() {
         return boardRepository.findAll()
                 .stream()
